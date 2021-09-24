@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 public class TestSimple {
 
@@ -19,10 +20,12 @@ public class TestSimple {
 		// mock
 		List lst = mock(ArrayList.class);
 		// stubbing
-		when(lst.get(0)).thenReturn("hello");
+		when(lst.get(Mockito.anyInt())).thenReturn("hello");
 		when(lst.size()).thenReturn(1);
-		assertEquals("hello",lst.get(0));
+		assertEquals("hello",lst.get(2));
 		assertEquals(1,lst.size());
+		
+		
 	}
 	
 	@Test
