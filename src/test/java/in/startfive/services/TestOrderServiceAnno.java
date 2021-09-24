@@ -9,20 +9,30 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Spy;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-public class TestOrderService {
+@ExtendWith(MockitoExtension.class)
+public class TestOrderServiceAnno {
 
-	private SMSService sMSService = mock(SMSService.class);
-	
-	//if any of the method not stubbed wil call real method
-	//spy is partial mock
-	private EmailService emailService = spy(EmailService.class);
-    
+	@Mock
+	private SMSService sMSService;
+
+	@Spy
+	private EmailService emailService ;
+
+	@InjectMocks
 	private OrderService orderService;
+
 
 	@Test
 	public void testplaceorder() {
-		orderService = new  OrderService(sMSService, emailService);
+        // eq to line # 27,28
+		//orderService = new  OrderService(sMSService, emailService);
+		
 		doReturn(true).when(emailService).sendEmail();
 		when(sMSService.sendSMS()).thenReturn(true);
 		
